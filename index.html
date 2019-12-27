@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+
+        .dragArea {
+            margin-bottom: 40px;
+        }
+        .task-option {
+            position: relative;
+            margin-bottom: 20px;
+            padding: 12px 20px 12px 50px;
+            border-radius: 10px;
+            box-shadow: 0 0 0 rgba(0,0,0,0.1);
+            -webkit-transition: box-shadow .2s;
+            transition: box-shadow .2s;
+            background-color: #fff;
+            z-index:0
+        }
+        .snap-point {
+            position: absolute;
+            width: 0;
+            height: 0;
+            margin-left: -2px;
+            margin-top: -2px;
+            border: 2px solid #24c4f1;
+        }
+        .anster-div {
+            padding-left: 16px;
+            border-left: 2px solid #dadada;
+            line-height: 1.2;
+            text-shadow: #000 0px 2px 5px
+        }
+        .task-num {
+            position: absolute;
+            color: #6a6a6a;
+            left: 0;
+            top: 50%;
+            margin-top: -15px;
+            display: block;
+            width: 47px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+        .target-div {
+            background-color: #cad4d7;
+            width: 75px;
+            height: 30px;
+            margin-left: 5px;
+            display: inline-block;
+            float: right;
+            text-align: center;
+            color: #fafafa;
+            border-radius:5px
+        }
+        .source-div {
+            background-color: #cad4d7;
+            width: 75px;
+            height: 30px;
+            margin-left: 5px;
+            text-align: center;
+            color: #fafafa;
+            border-radius: 5px
+        }
+
+    </style>
+
+    <script src="plain-draggable.min.js"></script>
+
+</head>
+<body style="background: #fff;">
+
+    <div class="content" id="content" style="margin:5% 8% 10% 8%;background-color:rgb(250, 250, 250);min-height:900px;">
+
+
+        <div class="content-right" style="position:absolute;left:400px;width:300px;padding-top: 30px;padding-right:20px">
+            <!--<div class="snap-point" style="left: 100px; top: 100px;"></div>-->
+            <div class="task-option" id="targetdiv" v-on:click="OptClick($event,'A')">
+                <span class="task-num">A</span>
+                <div class="anster-div" style="display:inline-block;">
+                    <!--<div id="targetdiv" style="background-color:aqua;top:200px;left:400px;width:200px;height:100px"></div>-->
+                    一般
+                </div>
+                <div class="target-div" id="targetA">
+                    拖入区
+                </div>
+            </div>
+            <div class="task-option" v-on:click="OptClick($event,'B')">
+                <span class="task-num">B</span>
+                <div class="anster-div" style="display:inline-block;">
+                    天下第一
+                </div>
+                <div class="target-div" id="targetB">
+                    拖入区
+                </div>
+            </div>
+            <div class="task-option" v-on:click="OptClick($event,'B')">
+                <span class="task-num">C</span>
+                <div class="anster-div" style="display:inline-block;">
+                    还好
+                </div>
+                <div class="target-div" id="targetC">
+                    拖入区
+                </div>
+            </div>
+        </div>
+        <div class="content-left" style="width:49%;padding-top: 30px;padding-right:20px">
+            <div class="source-div" id="target-source">
+                <div id="draggable" style="display: inline-block;background: url('abb-logo-33px.svg') no-repeat;
+            padding: 1px 3px;height:30px;width:70px;
+            font-weight: bold;
+            color: white;">                    
+                </div>
+            </div>
+        </div>
+    </div>
+        <script>
+
+            //window.addEventListener('load', function () {
+            //    'use strict';
+
+            //    new PlainDraggable(document.getElementById('draggable'), {
+            //        snap: 100
+            //    });
+
+            //});
+
+            window.addEventListener('load', function () {
+                'use strict';
+
+                var targetB = document.getElementById('targetB'),
+                 targetS = document.getElementById('target-source')
+
+                new PlainDraggable(document.getElementById('draggable'), {
+                    snap: {
+                        targets: [
+                            {
+                                boundingBox: targetS,
+                                gravity: 40,
+                                edge: 'inside'
+
+                            },
+                            {
+                                boundingBox: targetB,
+                                gravity: 80,
+                                edge: 'inside'
+                                
+                            }
+                        ]
+                    },
+                    containment: document.getElementById('content'),
+                    zIndex: true,
+                    
+                });
+                //bBox = draggable.element.getBoundingClientRect();
+
+                //draggable.containment.style.width = 40 * 17 + bBox.width + 0.5 + 'px';
+                //draggable.containment.style.height = 40 * 2 + bBox.height + 0.5 + 'px';
+                //draggable.position();
+
+            });
+
+        </script>
+</body>
+</html>
