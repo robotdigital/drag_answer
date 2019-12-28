@@ -134,9 +134,10 @@
                 'use strict';
 
                 var targetB = document.getElementById('targetB'),
-                 targetS = document.getElementById('target-source')
+                    targetS = document.getElementById('target-source'),
+                    portPosition = targetS.getBoundingClientRect();
 
-                new PlainDraggable(document.getElementById('draggable'), {
+                  new PlainDraggable(document.getElementById('draggable'), {
                     snap: {
                         targets: [
                             {
@@ -154,7 +155,7 @@
                         ]
                     },
                     onDragEnd: function (newPosition){
-                        alert('OK');
+                        alert("嘿嘿！为您做出正确的选择感到高兴！");
                     },
                     containment: document.getElementById('content'),
                     zIndex: true,
